@@ -22,7 +22,8 @@ void	*ft_calloc(size_t count, size_t size)
 
 	i = 0;
 	totalmem = count * size;
-	if (!(str = malloc(sizeof(char) * totalmem)))
+	str = malloc(sizeof(char) * totalmem);
+	if (!str)
 		return (0);
 	while (totalmem > 0)
 	{

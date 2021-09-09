@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "libft.h"
 
-int		ft_start(char const *s1, char const *set)
+int	ft_start(char const *s1, char const *set)
 {
 	int		i;
 	int		j;
@@ -34,7 +34,7 @@ int		ft_start(char const *s1, char const *set)
 	return (i);
 }
 
-int		ft_end(char const *s1, char const *set)
+int	ft_end(char const *s1, char const *set)
 {
 	int		i;
 	int		j;
@@ -68,15 +68,15 @@ char	*ft_strtrim(char const *s1, char const *set)
 	i = ft_end(s1, set);
 	if (i == 0)
 		start = i;
-	if (!(str = malloc(sizeof(char) * (i - start) + 2)))
+	str = malloc(sizeof(char) * (i - start) + 2);
+	if (!str)
 		return (NULL);
 	str[0] = s1[start];
 	j = 0;
 	k = start;
 	while (j <= i - start && (i - start) != 0)
 	{
-		str[j] = s1[k];
-		k++;
+		str[j] = s1[k++];
 		j++;
 	}
 	str[j] = 0;

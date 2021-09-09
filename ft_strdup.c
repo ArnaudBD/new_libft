@@ -15,7 +15,7 @@
 
 char	*ft_strcpy(char *dest, char *src)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (src[i])
@@ -34,7 +34,8 @@ char	*ft_strdup(const char *src)
 	int		i;
 
 	size = ft_strlen(src);
-	if (!(str = malloc(sizeof(char) * size + 1)))
+	str = malloc(sizeof(char) * size + 1);
+	if (!str)
 		return (0);
 	i = 0;
 	while (src[i])

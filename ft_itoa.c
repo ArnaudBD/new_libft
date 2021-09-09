@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "libft.h"
 
-int		int_len(unsigned int nb)
+int	int_len(unsigned int nb)
 {
 	int	div;
 	int	len;
@@ -29,6 +29,28 @@ int		int_len(unsigned int nb)
 	return (len);
 }
 
+int	ft_nb(int n)
+{
+	int	nb;
+
+	if (n < 0)
+		nb = -n;
+	else
+		nb = n;
+	return (nb);
+}
+
+int	ft_neg(int n)
+{
+	int	neg;
+
+	if (n < 0)
+		neg = 1;
+	else
+		neg = 0;
+	return (neg);
+}
+
 char	*ft_itoa(int n)
 {
 	char			*str;
@@ -36,21 +58,21 @@ char	*ft_itoa(int n)
 	int				neg;
 	unsigned int	nb;
 
-	nb = (n < 0 ? -n : n);
-	neg = (n < 0 ? 1 : 0);
+	nb = ft_nb(n);
+	neg = ft_neg(n);
 	if (n == 0)
 		i = 1;
 	else
 		i = neg + int_len(nb);
-	if (!(str = malloc(sizeof(char) * i + 1)))
+	str = malloc(sizeof(char) * i + 1);
+	if (!str)
 		return (NULL);
 	str[i] = 0;
 	if (n == 0)
 		str[0] = '0';
 	while (nb != 0)
 	{
-		i--;
-		str[i] = nb % 10 + '0';
+		str[--i] = nb % 10 + '0';
 		nb = nb / 10;
 	}
 	if (neg != 0)

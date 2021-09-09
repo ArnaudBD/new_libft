@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static char		**freedom(char **tab, int j)
+static char	**freedom(char **tab, int j)
 {
 	while (j >= 0)
 	{
@@ -23,7 +23,7 @@ static char		**freedom(char **tab, int j)
 	return (NULL);
 }
 
-static int		nb_words(char const *s, char c)
+static int	nb_words(char const *s, char c)
 {
 	int		i;
 	int		nb;
@@ -41,7 +41,7 @@ static int		nb_words(char const *s, char c)
 	return (nb);
 }
 
-static char		**filling_good(char const *s, char **tab, char c)
+static char	**filling_good(char const *s, char **tab, char c)
 {
 	int		i;
 	int		j;
@@ -70,7 +70,7 @@ static char		**filling_good(char const *s, char **tab, char c)
 	return (tab);
 }
 
-static char		**ft_malloc_split(char const *s, char c, char **tab, int i)
+static char	**ft_malloc_split(char const *s, char c, char **tab, int i)
 {
 	int		j;
 	int		first_letter;
@@ -87,7 +87,8 @@ static char		**ft_malloc_split(char const *s, char c, char **tab, int i)
 			first_letter = i;
 			while (s[i] != 0 && s[i] != c)
 				i++;
-			if (!(tab[j] = malloc(sizeof(char) * (i - first_letter) + 1)))
+			tab[j] = malloc(sizeof(char) * (i - first_letter) + 1);
+			if (!tab)
 			{
 				tab = freedom(tab, j);
 				return (NULL);
@@ -98,7 +99,7 @@ static char		**ft_malloc_split(char const *s, char c, char **tab, int i)
 	return (tab);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**tab;
 	int		i;
@@ -108,14 +109,16 @@ char			**ft_split(char const *s, char c)
 		return (0);
 	i = 0;
 	j = 0;
-	if (!(tab = malloc(sizeof(char*) * (nb_words(s, c) + 1))))
+	tab = malloc(sizeof(char *) * (nb_words(s, c) + 1));
+	if (!tab)
 		return (NULL);
 	tab = ft_malloc_split(s, c, tab, i);
 	if (tab == NULL)
 		return (tab);
 	else
 	{
-		if (!(tab[nb_words(s, c)] = malloc(sizeof(char))))
+		tab[nb_words(s, c)] = malloc(sizeof(char));
+		if (!tab)
 		{
 			tab = freedom(tab, j);
 			return (NULL);
